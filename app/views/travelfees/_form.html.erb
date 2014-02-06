@@ -1,0 +1,33 @@
+<%= form_for(@travelfee) do |f| %>
+  <% if @travelfee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@travelfee.errors.count, "error") %> prohibited this travelfee from being saved:</h2>
+
+      <ul>
+      <% @travelfee.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :userid %>
+    <%= f.select :userid, :collection=>[0001,0002]%>
+  </div>
+  <div class="field">
+    <%= f.label :classname %>
+    <%= f.text_field :classname %>
+  </div>
+  <div class="field">
+    <%= f.label :date %>
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :travel_fee %>
+    <%= f.number_field :travel_fee %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

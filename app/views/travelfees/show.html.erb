@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Userid:</b>
+  <%= @travelfee.userid %>
+</p>
+
+<p>
+  <b>Classname:</b>
+  <%= @travelfee.classname %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @travelfee.date %>
+</p>
+
+<p>
+  <b>Travel fee:</b>
+  <%= @travelfee.travel_fee %>
+</p>
+
+
+<%= link_to 'Edit', edit_travelfee_path(@travelfee) %> |
+<%= link_to 'Back', travelfees_path %>

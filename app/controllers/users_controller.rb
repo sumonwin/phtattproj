@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     # @users = User.all
 
     @users = User.find(:all, :conditions=>["userid LIKE ? && name LIKE ? && team LIKE ? " , "%#{params[:userid]}%","%#{params[:name]}%","%#{params[:team]}%"])
-    
+  
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }

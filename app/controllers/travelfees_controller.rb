@@ -2,8 +2,8 @@ class TravelfeesController < ApplicationController
   # GET /travelfees
   # GET /travelfees.json
   def index
-    @travelfees = Travelfee.all
-
+    @travelfee = Travelfee.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @travelfees }

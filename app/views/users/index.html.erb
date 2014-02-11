@@ -14,7 +14,6 @@
 </table>
 <%= submit_tag :find %>
 <% end %>
-
 <table>
   <tr>
     <th>Userid</th>
@@ -57,7 +56,7 @@
 
 <br />
 
-
+<%= will_paginate @users %>
 <%= link_to 'New User', new_user_path %>
 
 

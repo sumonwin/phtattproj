@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-  # GET /users
+  # GET /userserer
   # GET /users.json
   def index
     # @users = User.all
 
-    @users = User.find(:all, :conditions=>["userid LIKE ? && name LIKE ? && team LIKE ? " , "%#{params[:userid]}%","%#{params[:name]}%","%#{params[:team]}%"])
-  
-    respond_to do |format|
+    
+    @users = User.paginate(:page=>params[:page],:per_page=>5).find(:all,:conditions=>["userid LIKE ? && name LIKE ? && team LIKE ? " , "%#{params[:userid]}%","%#{params[:name]}%","%#{params[:team]}%"])
+     respond_to do |format| 
       format.html # index.html.erb
       format.json { render json: @users }
     end

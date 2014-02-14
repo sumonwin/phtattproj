@@ -1,9 +1,11 @@
+require "users_controller"
 class AttendancesController < ApplicationController
   # GET /attendances
   # GET /attendances.json
   def index
-    @attendances = Attendance.all
-
+    #@attendances = Attendance.all
+    @attendances = Attendance.paginate(:page=>params[:page],:per_page=>5).find(:all,:conditions=>["userid LIKE ? ","%#{params[:userid]}%"])
+    @users = User.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @attendances }
@@ -24,6 +26,7 @@ class AttendancesController < ApplicationController
   # GET /attendances/new
   # GET /attendances/new.json
   def new
+    @users =User.all
     @attendance = Attendance.new
 
     respond_to do |format|

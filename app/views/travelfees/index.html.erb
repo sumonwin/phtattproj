@@ -1,4 +1,24 @@
+<html>
 <h1>Listing travelfees</h1>
+
+<%= form_tag travelfees_path, :method => "get" do%>
+<table>
+  <tr>
+  <td>userid</td>
+  <td><%= select_tag :userid, options_for_select(@users.collect{|u| [u.userid,u.userid]}) %></td>
+  </tr>
+  <tr>
+      <td>From Date</td>
+      <td><%= date_select :date,params[:date] %></td>
+  </tr>
+  <tr>
+      <td>End Date</td>
+      <td><%= date_select :date,params[:date] %></td>
+  </tr>        
+  </table>
+  <%= submit_tag :find %>
+  <% end %>
+
 
 <table>
   <tr>
@@ -10,7 +30,6 @@
     <th></th>
     <th></th>
   </tr>
-
 <% @travelfees.each do |travelfee| %>
   <tr>
     <td><%= travelfee.userid %></td>
@@ -19,11 +38,14 @@
     <td><%= travelfee.travelfee %></td>
     <td><%= link_to 'Show', travelfee %></td>
     <td><%= link_to 'Edit', edit_travelfee_path(travelfee) %></td>
-    <td><%= link_to 'Destroy', travelfee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', travelfee, method: :delete, data: { confirm: 'Are you  sure?' } %></td>
   </tr>
 <% end %>
+
+
 </table>
 
 <br />
-
+<%= will_paginate @travelfees %>
 <%= link_to 'New Travelfee', new_travelfee_path %>
+</html>

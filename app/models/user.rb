@@ -4,14 +4,15 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+    has_many :travelfees
+    has_many :attendances
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :NRCnumber, :address, :date_of_entry, :dob, :gender, :leaveday, :name, :normaltravelfee, :phone, :team, :userid, :year_of_entry
   
 
 validates :userid, numericality: {only_integer:true}
-validates :name,presence: true,format: {with:/\A[a-zA-Z0-9]+\z/,message:"only letters allowed"}
+validates :name,presence: true,format: {with:%r{\A[a-zA-z][a-zA-z0-9\s]*\z}}
 # validates :dob,numericality: {only_integer:true}
 validates :address,presence: true
 validates :phone, numericality: {only_integer:true}

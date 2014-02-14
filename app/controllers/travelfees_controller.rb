@@ -1,9 +1,16 @@
+require"users_controller"
+require"timetables_controller"
 class TravelfeesController < ApplicationController
   # GET /travelfees
   # GET /travelfees.json
   def index
-    @travelfee = Travelfee.all
     
+    #@travelfees = Travelfee.all
+    @travelfees = Travelfee.paginate(:page=>params[:page],:per_page=>5).find(:all,:conditions=>["userid LIKE ? " , 
+     "%#{params[:userid]}%"])
+    @users = User.all
+    @travelfee = Travelfee.new
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @travelfees }
@@ -14,6 +21,8 @@ class TravelfeesController < ApplicationController
   # GET /travelfees/1.json
   def show
     @travelfee = Travelfee.find(params[:id])
+     @users = User.all
+    @travelfee = Travelfee.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,8 +33,10 @@ class TravelfeesController < ApplicationController
   # GET /travelfees/new
   # GET /travelfees/new.json
   def new
+    @users = User.all
     @travelfee = Travelfee.new
-
+    @timetables = Timetable.all
+  
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @travelfee }

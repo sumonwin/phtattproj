@@ -32,7 +32,12 @@
 
 <p>
   <b>Gender:</b>
-  <%= @user.gender %>
+  <% if (@user.gender ==true) %>
+  Male
+
+  <% else %>
+   Female
+   <% end %>
 </p>
 
 <p>

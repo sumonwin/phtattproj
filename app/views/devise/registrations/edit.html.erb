@@ -1,18 +1,10 @@
-<%=simple_form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.input :userid, :as => :select,:collection => @users.map{ |u| [u.userid,u.userid]} %> 
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_notification %>
+   <div class="field">
+    <%= f.label :userid %><br />
+    <%= f.number_field :userid %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -20,7 +12,7 @@
   </div>
   <div class="field">
     <%= f.label :dob %><br />
-    <%= f.date_select :dob,:start_year =>Time.now.year-110,:end_year=>Time.now.year %>
+    <%= f.date_select :dob %>
   </div>
   <div class="field">
     <%= f.label :address %><br />
@@ -62,16 +54,25 @@
     <%= f.label :leaveday %><br />
     <%= f.number_field :leaveday %>
   </div>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
-  
-   <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div class="form-inputs">
+    <%= f.input :email, :required => true, :autofocus => true %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+    <%= f.input :password_confirmation, :required => false %>
+    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Update" %>
   </div>
 <% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

@@ -1,18 +1,10 @@
-<%=simple_form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<h2>Sign up</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.input :userid, :as => :select,:collection => @users.map{ |u| [u.userid,u.userid]} %> 
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+ <div class="field">
+    <%= f.label :userid %><br />
+    <%= f.number_field :userid %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
@@ -20,7 +12,7 @@
   </div>
   <div class="field">
     <%= f.label :dob %><br />
-    <%= f.date_select :dob,:start_year =>Time.now.year-110,:end_year=>Time.now.year %>
+    <%= f.date_select :dob %>
   </div>
   <div class="field">
     <%= f.label :address %><br />
@@ -71,7 +63,9 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
   </div>
 <% end %>
+
+<%= render "devise/shared/links" %>

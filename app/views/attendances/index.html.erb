@@ -31,8 +31,8 @@
   <tr>
     <td><%= attendance.userid %></td>
     <td><%= attendance.date %></td>
-    <td><%= attendance.reachtime %></td>
-    <td><%= attendance.leavetime %></td>
+    <td><%= attendance.reachtime.strftime("%H:%M:%S") %></td>
+    <td><%= attendance.leavetime.strftime("%H:%M:%S") %></td>
     <td><%= link_to 'Show', attendance %></td>
     <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
     <td><%= link_to 'Destroy', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>

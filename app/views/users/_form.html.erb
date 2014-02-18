@@ -12,7 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.input :userid, :as => :select,:collection => @users.map{ |u| [u.userid,u.userid]} %> 
+    <%= f.label :userid %><br />
+    <%= f.text_field :userid %> 
   </div>
   <div class="field">
     <%= f.label :name %><br />
